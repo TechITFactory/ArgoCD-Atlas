@@ -1,7 +1,7 @@
 # ArgoCD — Zero to Production (v2.0)
 ## Full Course Syllabus
 
-> **Duration:** 46 days (Day 00 – Day 45)
+> **Duration:** 43 days (Day 00 – Day 42)
 > **Goal:** Take an engineer from zero ArgoCD knowledge to confidently running
 > production-grade GitOps pipelines.
 
@@ -28,7 +28,7 @@
 
 ---
 
-## Module 02 — App Sources (5 days)
+## Module 02 — App Sources (4 days)
 
 | Day | Topic |
 |-----|-------|
@@ -36,19 +36,14 @@
 | 08  | Directory sources & monorepo patterns |
 | 09  | Helm integration |
 | 10  | Kustomize overlays |
-| 11  | Plugins & custom tooling (CMP) |
-
 ---
 
-## Module 03 — Sync Policies (5 days)
+## Module 03 — Sync Policies (2 days)
 
 | Day | Topic |
 |-----|-------|
-| 12  | Manual vs automated sync |
-| 13  | Sync options (prune, self-heal, replace) |
-| 14  | Sync phases & waves |
-| 15  | Resource hooks (PreSync, Sync, PostSync, SyncFail) |
-| 16  | Sync windows |
+| 11  | Manual + automated sync and sync options |
+| 12  | Resource hooks (PreSync, Sync, PostSync, SyncFail) |
 
 ---
 
@@ -56,10 +51,10 @@
 
 | Day | Topic |
 |-----|-------|
-| 17  | Drift detection mechanics |
-| 18  | Diff strategies |
-| 19  | Ignoring diffs (ignoreDifferences) |
-| 20  | Health checks & orphaned resources |
+| 13  | Drift detection mechanics |
+| 14  | Diff strategies |
+| 15  | Ignoring diffs (ignoreDifferences) |
+| 16  | Health checks & orphaned resources |
 
 ---
 
@@ -67,21 +62,22 @@
 
 | Day | Topic |
 |-----|-------|
-| 21  | SSO concepts (OIDC, SAML) |
-| 22  | SSO setup (Dex / external providers) |
-| 23  | RBAC policy (roles, groups, permissions) |
-| 24  | AppProject isolation & resource whitelists |
+| 17  | SSO concepts (OIDC, SAML) |
+| 18  | SSO setup (Dex / external providers) |
+| 19  | RBAC policy (roles, groups, permissions) |
+| 20  | AppProject isolation & resource whitelists |
 
 ---
 
-## Module 06 — ApplicationSets (4 days)
+## Module 06 — ApplicationSets (5 days)
 
 | Day | Topic |
 |-----|-------|
-| 25  | ApplicationSet theory & controller |
-| 26  | List & Git generators |
-| 27  | Cluster generator & multi-cluster patterns |
-| 28  | Progressive sync strategies (RolloutSteps) |
+| 21  | ApplicationSet theory & controller |
+| 22  | List & Git generators |
+| 23  | Cluster generator & multi-cluster patterns |
+| 24  | Progressive sync strategies (RolloutSteps) |
+| 25  | Advanced generators |
 
 ---
 
@@ -89,9 +85,9 @@
 
 | Day | Topic |
 |-----|-------|
-| 29  | Secrets in GitOps — intro & anti-patterns |
-| 30  | Sealed Secrets |
-| 31  | External Secrets Operator (ESO) |
+| 26  | Secrets in GitOps — intro & anti-patterns |
+| 27  | Sealed Secrets |
+| 28  | External Secrets Operator (ESO) |
 
 ---
 
@@ -99,9 +95,9 @@
 
 | Day | Topic |
 |-----|-------|
-| 32  | CI → CD handover patterns |
-| 33  | ArgoCD Image Updater |
-| 34  | Git write-back strategy |
+| 29  | CI → CD handover patterns |
+| 30  | ArgoCD Image Updater |
+| 31  | Git write-back strategy |
 
 ---
 
@@ -109,8 +105,8 @@
 
 | Day | Topic |
 |-----|-------|
-| 35  | ArgoCD Notifications — triggers & templates |
-| 36  | ChatOps integration (Slack, Teams, PagerDuty) |
+| 32  | ArgoCD Notifications — triggers & templates |
+| 33  | ChatOps integration (Slack, Teams, PagerDuty) |
 
 ---
 
@@ -118,9 +114,9 @@
 
 | Day | Topic |
 |-----|-------|
-| 37  | Prometheus metrics & alerting |
-| 38  | Grafana dashboards |
-| 39  | Logs & debugging techniques |
+| 34  | Prometheus metrics & alerting |
+| 35  | Grafana dashboards |
+| 36  | Logs & debugging techniques |
 
 ---
 
@@ -128,9 +124,9 @@
 
 | Day | Topic |
 |-----|-------|
-| 40  | High-availability setup & horizontal scaling |
-| 41  | Disaster recovery & backup strategies |
-| 42  | ArgoCD upgrades & maintenance |
+| 37  | High-availability setup & horizontal scaling |
+| 38  | Disaster recovery & backup strategies |
+| 39  | ArgoCD upgrades & maintenance |
 
 ---
 
@@ -138,9 +134,9 @@
 
 | Day | Topic |
 |-----|-------|
-| 43  | Design — plan a production GitOps platform |
-| 44  | Implementation — build & deploy |
-| 45  | Review — peer review, retrospective, next steps |
+| 40  | Design — plan a production GitOps platform |
+| 41  | Implementation — build & deploy |
+| 42  | Review — peer review, retrospective, next steps |
 
 ---
 
@@ -148,19 +144,19 @@
 
 ```
 modules/
-├── module-00-setup           (Day 00)
-├── module-01-foundations     (Days 01–06)
-├── module-02-app-sources     (Days 07–11)
-├── module-03-sync-policies   (Days 12–16)
-├── module-04-diff-drift      (Days 17–20)
-├── module-05-security-rbac   (Days 21–24)
-├── module-06-applicationsets (Days 25–28)
-├── module-07-secrets         (Days 29–31)
-├── module-08-ci-integration  (Days 32–34)
-├── module-09-notifications   (Days 35–36)
-├── module-10-observability   (Days 37–39)
-├── module-11-ha-dr           (Days 40–42)
-└── module-12-capstone        (Days 43–45)
+├── Section-00-setup           (Day 00)
+├── Section-01-foundations     (Days 01–06)
+├── Section-02-app-sources     (Days 07–10)
+├── Section-03-sync-policies   (Days 11–12)
+├── Section-04-diff-drift      (Days 13–16)
+├── Section-05-security-rbac   (Days 17–20)
+├── Section-06-applicationsets (Days 21–25)
+├── Section-07-secrets         (Days 26–28)
+├── Section-08-ci-integration  (Days 29–31)
+├── Section-09-notifications   (Days 32–33)
+├── Section-10-observability   (Days 34–36)
+├── Section-11-ha-dr           (Days 37–39)
+└── Section-12-capstone        (Days 40–42)
 ```
 
 ---
