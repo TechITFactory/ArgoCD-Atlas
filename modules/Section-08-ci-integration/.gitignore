@@ -1,3 +1,0 @@
-# Ignore lesson notes and transcripts — push exercises only
-*.md
-!exercises/

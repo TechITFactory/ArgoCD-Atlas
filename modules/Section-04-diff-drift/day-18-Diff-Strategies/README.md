@@ -1,4 +1,48 @@
-# Day 18 — Exercise: Diff Strategies
+# Day 18 — Diff Strategies
+
+Legacy Diff: The default diff strategy. It performs a 3-way local diff between the live state, desired state, and the `last-applied-configuration`. It cannot predict modifications made by Kubernetes admission webhooks.
+
+Server-Side Diff: A newer, more robust strategy. It executes a Server-Side Apply in `dry-run` mode against the Kubernetes API. This allows admission controllers (like mutating webhooks from Istio or Cert-Manager) to process the manifest before Argo CD compares it, eliminating false positives caused by runtime annotations or labels.
+
+# --- 1. ENABLE SERVER-SIDE DIFF PER-APP ---
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    targetRevision: HEAD
+    path: guestbook
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: guestbook
+```
+
+# --- 2. GLOBAL SYSTEM-LEVEL CONFIGURATION ---
+# Enables Server-Side Diff globally across all applications
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cmd-params-cm
+  namespace: argocd
+data:
+  controller.diff.server.side: "true"
+```
+*(Note: Requires restarting the `argocd-application-controller` StatefulSet to take effect).*
+
+Operational Insight
+The introduction of mutating admission webhooks into Kubernetes meant resources were often modified right as they hit the cluster. The Legacy diff strategy would look at Git, see the webhook injections were missing, and report drift. Server-Side Diff properly bridges this gap by dry-running the resource first, preventing "false OutOfSync" reports and ensuring your GitOps pipeline remains trustworthy.
+
+---
+
+## Exercise: Diff Strategies
 
 > **What is this about?**
 > ArgoCD compares what's in Git vs what's running in the cluster to decide if

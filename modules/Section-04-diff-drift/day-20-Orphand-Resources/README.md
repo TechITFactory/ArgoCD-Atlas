@@ -1,4 +1,34 @@
-# Day 20 — Exercise: Health Checks & Orphaned Resources
+# Day 20 — Health Checks & Orphaned Resources
+
+Health Assessment: Argo CD provides built-in health assessment for several standard Kubernetes resources (e.g., ReplicaSets, Pods, Deployments) to determine if they are fully operational (`Healthy`, `Progressing`, `Degraded`, or `Suspended`). A `Degraded` state usually means a resource failed to reach its desired state (like a Pod crash-looping).
+
+Orphaned Resources Monitoring: A feature enabled at the `AppProject` level. It detects "orphaned" Kubernetes resources—resources living in an application's target namespace that are NOT tracked or managed by any Argo CD application. 
+
+Orphaned Resources Exceptions: Some resources are automatically created by cluster operators (like a Cert-Manager `Secret`). You can define `ignore` rules in your `AppProject` so Argo CD doesn't flag them as orphans.
+
+# --- 1. ENABLE ORPHANED RESOURCES MONITORING ---
+# This is configured at the Project level, not the Application level.
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: default
+  namespace: argocd
+spec:
+  # ... other project settings ...
+  orphanedResources:
+    warn: true
+    ignore:
+    - kind: Secret
+      name: "*.example.com"
+```
+
+Operational Insight
+By default, Argo CD only tracks what you tell it to track. If someone manually creates a ConfigMap in your production namespace using `kubectl`, Argo CD won't show it as "OutOfSync" because it's not looking for it. Enabling Orphaned Resources Monitoring solves this "dark matter" problem in your namespaces, ensuring you have 100% visibility into every resource running in your environment, not just the ones defined in Git.
+
+---
+
+## Exercise: Health Checks & Orphaned Resources
 > Prerequisites: Days 17–19 complete, guestbook app Synced
 > Time: ~40 minutes
 

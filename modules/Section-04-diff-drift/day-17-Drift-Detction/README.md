@@ -1,4 +1,34 @@
-# Day 17 — Exercise: Drift Detection
+# Day 17 — Drift Detection
+
+Drift Detection: Argo CD continuously monitors live Kubernetes resources and compares them to the desired state defined in Git. Any manual changes made directly to the cluster (e.g., via `kubectl edit`) result in Configuration Drift, causing the Application status to become `OutOfSync`.
+
+Self-Healing: A synchronization policy that automatically corrects drift. When `selfHeal: true` is enabled, Argo CD will instantly revert any unauthorized manual changes back to the Git-defined state.
+
+Soft Refresh: A standard refresh (`argocd app get <app> --refresh`) that tells Argo CD to pull the latest code from Git, comparing it against Argo CD's internal cache of the Kubernetes cluster.
+
+Hard Refresh: A forceful refresh (`argocd app get <app> --hard-refresh`) that bypasses all caches. Argo CD directly queries the Kubernetes API for the live state and the Git provider for the desired state. This is useful if the controller cache becomes temporarily stale.
+
+# --- 1. ENABLE AUTOMATED SELF-HEALING ---
+# This configuration guarantees the cluster state perfectly matches Git at all times.
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+spec:
+  # ... source and destination ...
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+```
+
+Operational Insight
+In a true GitOps environment, direct cluster access (`kubectl apply` or `edit`) should be restricted or disabled entirely. However, if an operator makes an emergency patch directly to the cluster, Drift Detection immediately flags it. By enabling `selfHeal`, you enforce Git as the absolute single source of truth—any manual "hotfixes" will be immediately overwritten, forcing developers to commit their fixes to Git properly.
+
+---
+
+## Exercise: Drift Detection
 > Prerequisites: ArgoCD running on minikube, argocd CLI in PATH
 > Time: ~30 minutes
 
